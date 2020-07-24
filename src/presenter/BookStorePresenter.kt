@@ -19,8 +19,7 @@ class BookStorePresenter : BookStoreContract.Presenter {
     }
 
     private fun parseAndShowBooks(response: String) {
-//        val books = JSON.parse<Array<Book>>(response)
-        val books = emptyList<Book>()
+        val books = JSON.parse<Array<Book>>(response)
         view.hideLoader()
         view.showBooks(books.toList())
     }
