@@ -6,7 +6,7 @@ import kotlin.browser.document
 import kotlin.browser.window
 import kotlin.dom.addClass
 
-class CardBuilder {
+class CardBuilder : HtmlBuilder{
     private fun bind(book: Book,
                      imageElement: HTMLImageElement,
                      titleElement: HTMLDivElement,
@@ -30,7 +30,7 @@ class CardBuilder {
     }
 
 
-    fun build(book: Book): HTMLElement {
+    override fun build(book: Book): HTMLElement {
         val containerElement = document.createElement("div") as HTMLDivElement
         val imageElement = document.createElement("img") as HTMLImageElement
         val titleElement = document.createElement("div") as HTMLDivElement

@@ -1,75 +1,56 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Book Store Kotlin</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
-
-<!--Header-->
-<div class="header">Book Store</div>
-
-<form class="form-horizontal" id="search-book-form">
-    <div class="form-group">
-        <div class="control-group" id="lastName">
-            <label class="col-sm-2 control-label">Last name </label>
-            <div class="col-sm-10">
-                <input class="form-control" size="30"
-                       maxlength="80"/> <span class="help-inline">
-                <div></div></span>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Find
-                Book
-            </button>
-        </div>
-    </div>
-
-</form>
-
-<br/>
 
 <form id="new_book_form">
     <label for="fTitle">Title:</label><br>
     <input type="text" id="fTitle" name="fTitle" value=""><br>
     <label for="fAuthor">Author:</label><br>
     <input type="text" id="fAuthor" name="fAuthor" value=""><br>
-    <label for="fGenre">Genre:</label><br>
+    <label for="fGenre">Description:</label><br>
     <input type="text" id="fGenre" name="fGenre" value=""><br><br>
 </form>
 <button id="add_new_book_btn" class="btn btn-default">Add</button>
 
+<h2>Books</h2>
 
-<!--<button id="add_new_book_btn" class="btn btn-default">Add</button>-->
-<!--<a href="welcome.html">Add new book</a>-->
-
-</body>
-</html>
-
-<!--Loader-->
-<div id="loader" class="loader">
-    <svg class="spinner" width="66px" height="66px" stroke-width="5" viewBox="0 0 66 66">
-        <circle cx="33" cy="33" r="25"></circle>
-    </svg>
-</div>
-
-<!--Content-->
-<div id="content" class="root root-children">
-    <!--You will append some cards here-->
-</div>
+<table id="home_books_table">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Description</th>
+    </tr>
+</table>
 
 <script>
     // A function to return the API URL.
     function getApiUrl(){
-      return "https://gist.githubusercontent.com/tarek360/4578e33621011e18829bad0c8d1c8cdf/raw/06d185bebc3e14a56dfa85f53288daddd4ff6a2b/books.json";
+<!--      return "https://gist.githubusercontent.com/abassawo/cc51d212481a1b0c69488fe2e13e144c/raw/16da7fcc52309a4696a9d2133b26d2c7dbce1d27/gistfile1.json";-->
+      return "https://gist.githubusercontent.com/abassawo/cc51d212481a1b0c69488fe2e13e144c/raw/63e2e2affcdb5b0ba352ff33264d1d9a1d6d74ba/gistfile1.json";
     }
 
 
 </script>
+
 
 <!--This script refers to the Kotlin2JS library in path out/production/{your project name}/lib/kotlin.js-->
 <script src="../../out/production/bookstore-kt/lib/kotlin.js"></script>

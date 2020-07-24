@@ -1,18 +1,15 @@
-package view
+package screens.home
 
 import data.Book
-import BookStoreContract.*
 import org.w3c.dom.*
+import view.RowBuilder
 import kotlin.browser.document
-import kotlin.browser.window
-import kotlin.dom.clear
+import kotlin.dom.appendElement
+import kotlin.dom.appendText
 
-class BookStorePage(private val presenter: Presenter) : View {
-    private val cardBuilder = CardBuilder()
-    private val loader by lazy { document.getElementById("loader") as HTMLDivElement }
-    private val content by lazy { document.getElementById("content") as HTMLDivElement }
-    override fun showLoader() = loader.setVisible(true)
-    override fun hideLoader() = loader.setVisible(false)
+class HomePage(private val presenter: HomePagePresenter) : BookStoreContract.View {
+    private val table: HTMLTableElement by lazy { document.getElementById("home_books_table") as HTMLTableElement }
+    private val rowBuilder: RowBuilder = RowBuilder()
 
     fun show() {
         presenter.attach(this)
@@ -36,28 +33,31 @@ class BookStorePage(private val presenter: Presenter) : View {
                     genre = genre,
                     author = author,
                     price = "free",
-                    description = "https://image.flaticon.com/icons/png/512/130/130304.png",
+                    description = genre,
                     url = "",
                     coverUrl = ""
             )
-
             appendBook(book)
         })
     }
 
-    override fun showBooks(books: List<Book>) = books.forEach(::appendBook)
 
     private fun appendBook(book: Book) {
         println(book.title)
-        val card = cardBuilder.build(book)
-        content.appendChild(card)
-    }
-}
-
-
-private fun HTMLElement.setVisible(visible: Boolean) =
-        if (visible) {
-            this.style.visibility = "visible"
-        } else {
-            style.visibility = "hidden"
+        table.apply {
+            val count = this.rows.length
+            val row = insertRow(count)
+            row.insertCell(0)
+            row.insertCell(1)
+            row.insertCell(2)
+            row.cells.get(0)?.textContent = book.title
+            row.cells.get(1)?.textContent = book.author
+            row.cells.get(2)?.textContent = book.description
         }
+    }
+
+    override fun showBooks(books: List<Book>) = books.forEach(::appendBook)
+
+    override fun showLoader() = Unit
+    override fun hideLoader() = Unit
+}
