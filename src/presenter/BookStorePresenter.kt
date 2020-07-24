@@ -10,18 +10,22 @@ class BookStorePresenter : BookStoreContract.Presenter {
 
     override fun attach(view: BookStoreContract.View) {
         this.view = view
+        loadBooks()
     }
 
     override fun loadBooks() {
         view.showLoader()
-        getAsync(API_URL) { response ->
-            val books = JSON.parse<Array<Book>>(response)
-            view.hideLoader()
-            view.showBooks(books.toList())
-        }
+        getBooks(API_URL, ::parseAndShowBooks)
     }
 
-    private fun getAsync(url: String, callback: (String) -> Unit) {
+    private fun parseAndShowBooks(response: String) {
+//        val books = JSON.parse<Array<Book>>(response)
+        val books = emptyList<Book>()
+        view.hideLoader()
+        view.showBooks(books.toList())
+    }
+
+    private fun getBooks(url: String, callback: (String) -> Unit) {
         val xmlHttp = XMLHttpRequest()
         xmlHttp.open("GET", url)
         xmlHttp.onload = {
